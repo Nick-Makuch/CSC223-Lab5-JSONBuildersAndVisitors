@@ -18,8 +18,8 @@ public class GeometryBuilder extends DefaultBuilder
     		                          PointNodeDatabase points,
     		                          SegmentNodeDatabase segments)
     {
-		FigureNode node = new FigureNode(description , points, segments);
-        return node;
+		FigureNode figureNode = new FigureNode(description , points, segments);
+        return figureNode;
     }
     
 	
@@ -34,6 +34,8 @@ public class GeometryBuilder extends DefaultBuilder
     public void addSegmentToDatabase(SegmentNodeDatabase segments, PointNode from, PointNode to)
     {
     	if (segments != null) segments.addUndirectedEdge(from, to);
+    	
+
     }
     
 	@Override
@@ -52,6 +54,7 @@ public class GeometryBuilder extends DefaultBuilder
 	@Override
     public PointNode buildPointNode(String name, double x, double y)
     {
-        return null;
+		PointNode pointNode = new PointNode(name , x ,y);
+        return pointNode;
     }
 }
