@@ -18,8 +18,8 @@ public class GeometryBuilder extends DefaultBuilder
     		                          PointNodeDatabase points,
     		                          SegmentNodeDatabase segments)
     {
-		FigureNode figureNode = new FigureNode(description , points, segments);
-        return figureNode;
+		return new FigureNode(description , points, segments);
+ 
     }
     
 	
@@ -54,7 +54,6 @@ public class GeometryBuilder extends DefaultBuilder
 	@Override
     public PointNode buildPointNode(String name, double x, double y)
     {
-		PointNode pointNode = new PointNode(name , x ,y);
-        return pointNode;
+		return new PointNode(name , x ,y);
     }
 }
