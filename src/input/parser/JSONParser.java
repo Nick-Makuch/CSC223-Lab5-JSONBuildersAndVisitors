@@ -87,7 +87,7 @@ public class JSONParser
 
 		// TODO: Build the whole AST, check for return class object, and return the root
 
-		_astRoot = new buildFigureNode(desc, points, segments);
+		_astRoot = new FigureNode(desc, points, segments);
 
 		return _astRoot;
 
