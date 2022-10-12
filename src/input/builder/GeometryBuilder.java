@@ -18,15 +18,15 @@ public class GeometryBuilder extends DefaultBuilder
     		                          PointNodeDatabase points,
     		                          SegmentNodeDatabase segments)
     {
-		FigureNode node = new FigureNode(description , points, segments);
-        return node;
+		
+        return new FigureNode(description , points, segments);
     }
     
 	
 	@Override
     public SegmentNodeDatabase buildSegmentNodeDatabase()
     {
-        return null;
+        return new SegmentNodeDatabase();
     }
     
 	
