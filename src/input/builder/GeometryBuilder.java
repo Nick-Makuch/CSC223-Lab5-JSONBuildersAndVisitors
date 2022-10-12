@@ -26,7 +26,7 @@ public class GeometryBuilder extends DefaultBuilder
 	@Override
     public SegmentNodeDatabase buildSegmentNodeDatabase()
     {
-        return null;
+        return new SegmentNodeDatabase();
     }
     
 	
@@ -41,13 +41,13 @@ public class GeometryBuilder extends DefaultBuilder
 	@Override
     public SegmentNode buildSegmentNode(PointNode pt1, PointNode pt2)
     {
-        return null;
+        return new SegmentNode(pt1 , pt2);
     }
     
 	@Override
     public PointNodeDatabase buildPointDatabaseNode(List<PointNode> points)
     {
-        return null;
+        return new PointNodeDatabase(points);
     }
     
 	
