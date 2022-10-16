@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import input.builder.DefaultBuilder;
 import input.components.*;
 import input.components.point.PointNode;
 import input.components.point.PointNodeDatabase;
@@ -29,11 +30,14 @@ import input.exception.ParseException;
 public class JSONParser
 {
 	protected ComponentNode  _astRoot;
+	private DefaultBuilder _builder;
 
 
 	public JSONParser()
 	{
 		_astRoot = null;
+		_builder = null;
+		
 	}
 
 	private void error(String message)
@@ -83,15 +87,14 @@ public class JSONParser
 
 		
 
-		
-
-		// TODO: Build the whole AST, check for return class object, and return the root
-
-		_astRoot = new FigureNode(desc, points, segments);
+	
+		_astRoot = _builder.buildFigureNode(desc, points, segments);
 
 		return _astRoot;
 
 	}
+	
+	
 	
 	/*
 	 * 
@@ -102,8 +105,10 @@ public class JSONParser
 
 	private PointNodeDatabase nodeMaker(JSONObject data) {
 		
-		//create a database for the points
-		PointNodeDatabase JSONPoints =  new PointNodeDatabase();
+		
+		//create a list of points to add to database at the end
+		List<PointNode> pointsList = new ArrayList<>();
+		
 		
 		//make a json array for everything after the key points
 		JSONArray pointArray = data.getJSONArray("Points");
@@ -116,18 +121,20 @@ public class JSONParser
 			JSONObject jsonPoint = (JSONObject) p; 
 			
 			//create a new point with the key being x and y for respective values
-			PointNode point = new PointNode(jsonPoint.getString("name"), 
+			PointNode point = _builder.buildPointNode(jsonPoint.getString("name"), 
 					jsonPoint.getInt("x") , jsonPoint.getInt("y"));
 			
 			//add the point to the database
-			JSONPoints.put(point);
+			pointsList.add(point);
 			
 		}
-
 		
-		//return the database
-		return JSONPoints;
+		//create a database for the points
+		return  _builder.buildPointDatabaseNode(pointsList);
+		
 	}
+	
+	
 	
 	
 	
@@ -144,6 +151,7 @@ public class JSONParser
 	}
 
 	
+	
 	/*
 	 * 
 	 * Helper method to separate the segments in a figure
@@ -152,7 +160,10 @@ public class JSONParser
 	
 	private SegmentNodeDatabase segmentMaker(JSONObject data, PointNodeDatabase points) {
 		
-		SegmentNodeDatabase JSONSegmentDatabase =  new SegmentNodeDatabase();
+		//I STOPPED IMPLETMENTING THE BUILDER HERE
+		
+		
+		SegmentNodeDatabase JSONSegmentDatabase =  _builder.buildSegmentNodeDatabase();
 		
 		JSONArray segmentArray = data.getJSONArray("Segments");
 
@@ -188,6 +199,7 @@ public class JSONParser
 		return JSONSegmentDatabase;
 
 	}
+	
 	
 	/**
 	 * Helper method for segmentMaker()
