@@ -1,4 +1,4 @@
-package input.parser;
+
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import input.components.ComponentNode;
 import input.components.FigureNode;
 import input.exception.ParseException;
+import input.parser.JSONParser;
 
 
 
@@ -65,11 +66,6 @@ class ParseTest{
 
 		assertTrue(node instanceof FigureNode);
 		
-		StringBuilder sb = new StringBuilder();
-		
-
-		node.unparse(sb, 1);
-		System.out.println(sb.toString());
 
 
 	}
@@ -88,12 +84,6 @@ class ParseTest{
 
 		assertTrue(node instanceof FigureNode);
 		
-		StringBuilder sb = new StringBuilder();
-
-
-		node.unparse(sb, 1);
-
-		System.out.println(sb.toString());
 
 	}
 	
@@ -113,12 +103,6 @@ class ParseTest{
 
 		assertTrue(node instanceof FigureNode);
 		
-		StringBuilder sb = new StringBuilder();
-
-		
-		node.unparse(sb, 1);
-
-		System.out.println(sb.toString());
 
 	}
 	
@@ -135,14 +119,7 @@ class ParseTest{
 		ComponentNode node = ParseTest.runFigureParseTest("fully_connected_irregular_polygon.json");
 
 		assertTrue(node instanceof FigureNode);
-		
-		StringBuilder sb = new StringBuilder();
-		
-
-		node.unparse(sb, 1);
-		
-		System.out.println(sb.toString());
-
+	
 
 	}
 	

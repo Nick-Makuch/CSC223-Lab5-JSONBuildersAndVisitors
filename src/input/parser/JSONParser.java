@@ -5,8 +5,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-
-import input.builder.DefaultBuilder;
+import input.builder.GeometryBuilder;
 import input.components.*;
 import input.components.point.PointNode;
 import input.components.point.PointNodeDatabase;
@@ -30,21 +29,21 @@ public class JSONParser
 {
 	protected ComponentNode  _astRoot;
 	
-	private DefaultBuilder _builder;
+	private GeometryBuilder _builder;
 
 
 	public JSONParser()
 	{
 		_astRoot = null;
-		_builder = null;
+		_builder = new GeometryBuilder();
 		
 	}
-
+/*
 	private void error(String message)
 	{
 		throw new ParseException("Parse error: " + message);
 	}
-
+*/
 	
 	
 	/*
@@ -88,9 +87,9 @@ public class JSONParser
 		
 
 	
-		_astRoot = _builder.buildFigureNode(desc, points, segments);
+		return _astRoot = _builder.buildFigureNode(desc, points, segments);
 
-		return _astRoot;
+		
 
 	}
 	
@@ -116,11 +115,11 @@ public class JSONParser
 		
 		//loop through the given points and add each to the array
 		for(Object p : pointArray) {
-			//assign the variable to a value
+		
 
 			JSONObject jsonPoint = (JSONObject) p; 
 			
-			//create a new point with the key being x and y for respective values
+			
 			PointNode point = _builder.buildPointNode(jsonPoint.getString("name"), 
 					jsonPoint.getInt("x") , jsonPoint.getInt("y"));
 			
@@ -178,15 +177,15 @@ public class JSONParser
 			
 			//get the segments by getting everything after the key
 			JSONArray segments = jobject.getJSONArray(key);
-			List<PointNode> segmentsList = new ArrayList<>();
 			
 			//loop through the values after the key
 			for(Object s2 : segments) {
 
 				
 				String key2 = (String) s2;
+				
 				PointNode key2AsPointNode = getPointNode(key2, points);
-				segmentsList.add(key2AsPointNode);				
+								
 				_builder.addSegmentToDatabase(JSONSegmentDatabase, keyAsPointNode, key2AsPointNode);
 			}
 			
