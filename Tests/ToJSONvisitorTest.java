@@ -1,5 +1,8 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.AbstractMap;
+
+import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
 import input.components.FigureNode;
@@ -12,7 +15,7 @@ import input.visitor.ToJSONvisitor;
 public class ToJSONvisitorTest 
 {	
 	@Test
-	void toJSONvisitorTest() 
+	void visitFigureNodeTest() 
 	{
 		PointNode _testNode1 = new PointNode("Node1", 1 ,1);
 		PointNode _testNode2 = new PointNode("Node2" ,2 ,2);
@@ -35,10 +38,32 @@ public class ToJSONvisitorTest
 			
 		FigureNode testFigureNode = new FigureNode(_description, _testPointNodeDatabase, testSegmentNodeDatabase);
 		
-		ToJSONvisitor testVisitor = new ToJSONvisitor(testFigureNode);
-		testVisitor.toJsonObject(testFigureNode);
+		ToJSONvisitor testVisitor = new ToJSONvisitor();
+		StringBuilder sb = new StringBuilder();
+		JSONObject jsonFigureNode = (JSONObject) testVisitor.visitFigureNode(testFigureNode, 
+				new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0));
 		
 		
-		System.out.println(testVisitor.toString());
+		System.out.println(testVisitor.toString(0, jsonFigureNode));
 	}
+	
+	@Test
+	void visitSegNodeDatabaseTest() 
+	{
+		
+	}
+	
+	@Test
+	void visitPointNodeDatabaseTest() 
+	{
+		
+	}
+	
+	@Test
+	void visitPointNodeTest() 
+	{
+		
+	}
+	
+	
 }

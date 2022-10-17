@@ -9,6 +9,7 @@ import input.components.point.PointNode;
 import input.components.point.PointNodeDatabase;
 import input.components.segment.SegmentNode;
 import input.components.segment.SegmentNodeDatabase;
+import utilities.io.StringUtilities;
 
 public class ToJSONvisitor implements ComponentNodeVisitor
 {
@@ -41,12 +42,27 @@ public class ToJSONvisitor implements ComponentNodeVisitor
 
 	@Override
 	public Object visitFigureNode(FigureNode node, Object o) 
-	{
-		//JSONObject jSONfigureNode = new JSONObject();
+	{		
+		// Unpack the input object containing a Stringbuilder and an indentation level
+		@SuppressWarnings("unchecked")
+		AbstractMap.SimpleEntry<StringBuilder, Integer> pair = (AbstractMap.SimpleEntry<StringBuilder, Integer>)(o);
+		StringBuilder sb = pair.getKey();
+		int level = pair.getValue();
+			
+		sb.append(StringUtilities.indent(level) + "{" + "\n");
+		pair.setValue(pair.getValue() + 2);
+				
+		sb.append(StringUtilities.indent(level+1) + "Figure:\n");
+		sb.append(StringUtilities.indent(level+1) +"{" + "\n");
+		sb.append(StringUtilities.indent(level+2)+ "Description: " + node.getDescription() + ",\n");
+		        
+		node.getPointsDatabase().accept(this, o);
+		node.getSegments().accept(this, o);
+		        
+		sb.append(StringUtilities.indent(level+1) + "}\n");
+		sb.append(StringUtilities.indent(level) + "}\n");
 		
-		StringBuilder sb = new StringBuilder();
-		return new JSONObject(visitFigureNode((FigureNode)node,
-				 new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0)).toString());
+		return new JSONObject(sb.toString());
 		
 		//return null;
 	}
