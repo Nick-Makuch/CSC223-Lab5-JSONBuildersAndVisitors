@@ -1,3 +1,5 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 import input.components.FigureNode;
@@ -35,6 +37,7 @@ public class ToJSONvisitorTest
 		
 		ToJSONvisitor testVisitor = new ToJSONvisitor(testFigureNode);
 		testVisitor.toJsonObject(testFigureNode);
+		
 		
 		System.out.println(testVisitor.toString());
 	}
