@@ -20,6 +20,7 @@ import utilities.io.StringUtilities;
 
 import input.components.ComponentNode;
 import input.components.point.*;
+import input.visitor.ComponentNodeVisitor;
 
 public class SegmentNodeDatabase implements ComponentNode {
 	private Map<PointNode, Set<PointNode>> _adjLists;
@@ -31,6 +32,12 @@ public class SegmentNodeDatabase implements ComponentNode {
 	public SegmentNodeDatabase(Map<PointNode, Set<PointNode>> m) {
 		_adjLists = m;
 	}
+	
+	@Override
+	 public Object accept(ComponentNodeVisitor visitor, Object o)
+	 {
+		return visitor.visitSegmentDatabaseNode(this, o);
+	 }
 	
 	/**
 	 * Calculates the number of undirectedEdges in the database

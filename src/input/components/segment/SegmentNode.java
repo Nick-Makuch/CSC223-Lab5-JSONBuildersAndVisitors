@@ -10,6 +10,7 @@ package input.components.segment;
 
 import input.components.ComponentNode;
 import input.components.point.PointNode;
+import input.visitor.ComponentNodeVisitor;
 
 
 /**
@@ -28,6 +29,12 @@ public class SegmentNode implements ComponentNode
 		_point1 = pt1;
 		_point2 = pt2;
 	}
+	
+	@Override
+	 public Object accept(ComponentNodeVisitor visitor, Object o)
+	 {
+		return visitor.visitSegmentNode(this, o);
+	 }
 
 	@Override
 	public boolean equals(Object obj)

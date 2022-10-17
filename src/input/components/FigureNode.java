@@ -5,6 +5,7 @@ import java.util.Set;
 import input.components.point.PointNode;
 import input.components.point.PointNodeDatabase;
 import input.components.segment.SegmentNodeDatabase;
+import input.visitor.ComponentNodeVisitor;
 
 
 /**
@@ -39,7 +40,7 @@ public class FigureNode implements ComponentNode
 
 	/*
 	 * 
-	 * Method that will unparse a json file. Adds the decsription, points, and 
+	 * Method that will unparsed a json file. Adds the description, points, and 
 	 * segments to a string builder
 	 */
 	
@@ -52,16 +53,23 @@ public class FigureNode implements ComponentNode
 		//get the description
 		sb.append("Description: " + _description + "\n");
 		
-		//unparse the points calling the method from point node database
+		//Unparsed the points calling the method from point node database
 		_points.unparse(sb, level);
 		
 		
-		//unparse segments by calling the method from segment node database
+		//Unparsed segments by calling the method from segment node database
 		_segments.unparse(sb, level);
 		
 
     }
 	
+	@Override
+	 public Object accept(ComponentNodeVisitor visitor, Object o)
+	 {
+		return visitor.visitFigureNode(this, o);
+	 }
+	
+
 	
 	
 }

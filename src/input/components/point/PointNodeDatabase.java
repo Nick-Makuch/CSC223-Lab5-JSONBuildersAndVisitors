@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 import input.components.ComponentNode;
+import input.visitor.ComponentNodeVisitor;
 import utilities.io.StringUtilities;
 
 public class PointNodeDatabase implements ComponentNode
@@ -31,6 +32,11 @@ public class PointNodeDatabase implements ComponentNode
 		_points = new LinkedHashSet<PointNode>();
 	}
 	
+	@Override
+	 public Object accept(ComponentNodeVisitor visitor, Object o)
+	 {
+		return visitor.visitPointNodeDatabase(this, o);
+	 }
 	/**
 	 * Creates a new set of pointNodes with an existing 
 	 * list of pointNodes

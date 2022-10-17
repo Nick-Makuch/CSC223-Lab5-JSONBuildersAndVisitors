@@ -27,7 +27,7 @@ public class UnparseVisitor implements ComponentNodeVisitor
 		StringBuilder sb = pair.getKey();
 		int level = pair.getValue();
 
-        // TODO
+        sb.append();
 
         return null;
 	}
@@ -35,6 +35,10 @@ public class UnparseVisitor implements ComponentNodeVisitor
 	@Override
 	public Object visitSegmentDatabaseNode(SegmentNodeDatabase node, Object o)
 	{
+		@SuppressWarnings("unchecked")
+		AbstractMap.SimpleEntry<StringBuilder, Integer> pair = (AbstractMap.SimpleEntry<StringBuilder, Integer>)(o);
+		StringBuilder sb = pair.getKey();
+		int level = pair.getValue();
         // TODO
 		
         return null;
@@ -47,12 +51,20 @@ public class UnparseVisitor implements ComponentNodeVisitor
 	@Override
 	public Object visitSegmentNode(SegmentNode node, Object o)
 	{
+		@SuppressWarnings("unchecked")
+		AbstractMap.SimpleEntry<StringBuilder, Integer> pair = (AbstractMap.SimpleEntry<StringBuilder, Integer>)(o);
+		StringBuilder sb = pair.getKey();
+		int level = pair.getValue();
 		return null;
 	}
 
 	@Override
 	public Object visitPointNodeDatabase(PointNodeDatabase node, Object o)
 	{
+		@SuppressWarnings("unchecked")
+		AbstractMap.SimpleEntry<StringBuilder, Integer> pair = (AbstractMap.SimpleEntry<StringBuilder, Integer>)(o);
+		StringBuilder sb = pair.getKey();
+		int level = pair.getValue();
         // TODO
 		
         return null;
@@ -61,6 +73,10 @@ public class UnparseVisitor implements ComponentNodeVisitor
 	@Override
 	public Object visitPointNode(PointNode node, Object o)
 	{
+		@SuppressWarnings("unchecked")
+		AbstractMap.SimpleEntry<StringBuilder, Integer> pair = (AbstractMap.SimpleEntry<StringBuilder, Integer>)(o);
+		StringBuilder sb = pair.getKey();
+		int level = pair.getValue();
         // TODO
         
         return null;

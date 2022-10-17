@@ -9,6 +9,7 @@
 package input.components.point;
 
 import input.components.ComponentNode;
+import input.visitor.ComponentNodeVisitor;
 import utilities.io.StringUtilities;
 import utilities.math.MathUtilities;
 
@@ -62,6 +63,12 @@ public class PointNode implements ComponentNode
 		_y = y;
 		_name = name;
 	}
+	
+	@Override
+	 public Object accept(ComponentNodeVisitor visitor, Object o)
+	 {
+		return visitor.visitPointNode(this, o);
+	 }
 
 	@Override
 	public int hashCode()
