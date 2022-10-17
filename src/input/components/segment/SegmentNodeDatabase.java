@@ -199,11 +199,11 @@ public class SegmentNodeDatabase implements ComponentNode {
 	@Override
 	public void unparse(StringBuilder sb, int level) 
 	{
-		sb.append("\n" + "Segments:" + "\n" + "{" + "\n");
+		sb.append(StringUtilities.indent(level) + "Segments:" + "\n" + "{" + "\n");
 		
 		for (PointNode key : _adjLists.keySet()) 
 		{
-			sb.append(StringUtilities.indent(level) + key.getName() + " : ");
+			sb.append(StringUtilities.indent(level+1) + key.getName() + " : ");
 			
 			for(PointNode value : _adjLists.get(key)) 
 				sb.append(value.getName() + " ");
@@ -211,8 +211,7 @@ public class SegmentNodeDatabase implements ComponentNode {
 			sb.append("\n");
 		}
 		
-		sb.append("}");
-		sb.append("\n");
+		sb.append(StringUtilities.indent(level) + "}" + "\n");
 	}
 	
 	

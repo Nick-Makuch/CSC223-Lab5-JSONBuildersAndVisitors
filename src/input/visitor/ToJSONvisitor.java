@@ -13,8 +13,8 @@ public class ToJSONvisitor
 	public ToJSONvisitor(FigureNode node){
 		StringBuilder sb = new StringBuilder();
 		UnparseVisitor unparser = new UnparseVisitor();
-		_JsonObject = (JSONObject) unparser.visitFigureNode((FigureNode)node,
-		 new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0));
+		_JsonObject = new JSONObject((String) unparser.visitFigureNode((FigureNode)node,
+		 new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0)));
 	}
 	
 	public JSONObject toJsonObject(FigureNode node) 
