@@ -1,5 +1,6 @@
 package input.visitor;
 
+<<<<<<< Updated upstream
 import java.util.AbstractMap;
 
 import org.json.JSONObject;
@@ -34,4 +35,13 @@ public class ToJSONvisitor
 	{
 		return _JsonObject.toString(i);
 	}
+=======
+public class ToJSONvisitor {
+
+	
+	
+	//supposed to convert the AST of a geometry figure back into a JSON object
+	
+	
+>>>>>>> Stashed changes
 }

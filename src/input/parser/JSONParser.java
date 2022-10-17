@@ -3,7 +3,6 @@ package input.parser;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -160,7 +159,6 @@ public class JSONParser
 	
 	private SegmentNodeDatabase segmentMaker(JSONObject data, PointNodeDatabase points) {
 		
-		//I STOPPED IMPLETMENTING THE BUILDER HERE
 		
 		
 		SegmentNodeDatabase JSONSegmentDatabase =  _builder.buildSegmentNodeDatabase();
@@ -184,15 +182,13 @@ public class JSONParser
 			//loop through the values after the key
 			for(Object s2 : segments) {
 
-			//	JSONObject jsonSegment = (JSONObject) s2;
 				
 				String key2 = (String) s2;
 				PointNode key2AsPointNode = getPointNode(key2, points);
 				segmentsList.add(key2AsPointNode);				
 			}
 				
-			JSONSegmentDatabase.addAdjacencyList(keyAsPointNode, segmentsList);
-			
+			_builder.addSegmentToDatabase(JSONSegmentDatabase, keyAsPointNode, keyAsPointNode);
 		}
 
 		//
@@ -215,7 +211,6 @@ public class JSONParser
 		}
 		return null;
 	}
-	// TODO: implement supporting functionality
 
 }
 

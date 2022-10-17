@@ -37,11 +37,20 @@ public class FigureNode implements ComponentNode
 	}
 
 	
+	
+	@Override
+	public Object accept(ComponentNodeVisitor visitor, Object o) {
+	return visitor.visitFigureNode(this, o); }
+	
+	
+	
+	
 
 	/*
 	 * 
-	 * Method that will unparsed a json file. Adds the description, points, and 
+	 * Method that will unparse a json file. Adds the decsription, points, and 
 	 * segments to a string builder
+	 * @param 
 	 */
 	
 	
@@ -53,23 +62,16 @@ public class FigureNode implements ComponentNode
 		//get the description
 		sb.append("Description: " + _description + "\n");
 		
-		//Unparsed the points calling the method from point node database
+		//unparse the points calling the method from point node database
 		_points.unparse(sb, level);
 		
 		
-		//Unparsed segments by calling the method from segment node database
+		//unparse segments by calling the method from segment node database
 		_segments.unparse(sb, level);
 		
 
     }
 	
-	@Override
-	 public Object accept(ComponentNodeVisitor visitor, Object o)
-	 {
-		return visitor.visitFigureNode(this, o);
-	 }
-	
-
 	
 	
 }
