@@ -186,9 +186,10 @@ public class JSONParser
 				String key2 = (String) s2;
 				PointNode key2AsPointNode = getPointNode(key2, points);
 				segmentsList.add(key2AsPointNode);				
+				_builder.addSegmentToDatabase(JSONSegmentDatabase, keyAsPointNode, key2AsPointNode);
 			}
 				
-			_builder.addSegmentToDatabase(JSONSegmentDatabase, keyAsPointNode, keyAsPointNode);
+			
 		}
 
 		//

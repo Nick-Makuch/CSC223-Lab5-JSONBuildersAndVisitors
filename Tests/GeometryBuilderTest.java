@@ -63,8 +63,7 @@ class GeometryBuilderTest {
 		
 		
 	}
-	
-	
+
 	
 	
 	@Test
@@ -84,7 +83,7 @@ class GeometryBuilderTest {
 		//check that node 2 string menthod works
 		assertEquals( "(Node2)(2.0, 2.0)", segment.getPoint2().toString());
 		
-		
+		//do the same thing with different values
 		segment = _gb.buildSegmentNode(_testNode2 , _testNode3);
 		
 		//test that there are is nothing in the database
@@ -101,5 +100,8 @@ class GeometryBuilderTest {
 		
 		
 	}
+	
+	
+	
 
 }
