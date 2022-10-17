@@ -1,13 +1,18 @@
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import input.builder.GeometryBuilder;
+import input.components.FigureNode;
 import input.components.point.PointNode;
 import input.components.point.PointNodeDatabase;
 import input.components.segment.SegmentNode;
 import input.components.segment.SegmentNodeDatabase;
 
-import org.junit.jupiter.api.Test;
+
 
 class GeometryBuilderTest {
 	
@@ -19,7 +24,28 @@ class GeometryBuilderTest {
 	SegmentNode _testSegment1 = new SegmentNode(_testNode1 , _testNode2);
 	String _description = "description";
 	
-
+	@Test
+	void testBuildFigureNode() {
+		
+		//create a segment database
+		SegmentNodeDatabase segmentDatabase = _gb.buildSegmentNodeDatabase();
+		_gb.addSegmentToDatabase(segmentDatabase, _testNode2, _testNode1);
+		
+		//create a point database
+		List<PointNode> points = new ArrayList<PointNode>();
+		points.add(_testNode1);
+		points.add(_testNode2);
+		PointNodeDatabase pointNodes = _gb.buildPointDatabaseNode(points);
+		
+		FigureNode figureNode = _gb.buildFigureNode(_description,pointNodes , segmentDatabase);
+		
+		//check that the descruptiuon matches
+		assertEquals(_description , figureNode.getDescription());
+		
+		assertEquals(pointNodes , figureNode.getPointsDatabase());
+		
+		
+	}
 	
 	
 	
@@ -33,6 +59,9 @@ class GeometryBuilderTest {
 		
 		//check that the database is equal to itself
 		assertTrue(segmentDatabase.equals(segmentDatabase));
+		
+		
+		
 		
 		
 	}
@@ -99,6 +128,60 @@ class GeometryBuilderTest {
 		assertEquals( "(Node3)(3.0, 3.0)", segment.getPoint2().toString());
 		
 		
+	}
+	
+	
+	
+	@Test
+	void testBuildPointNodeDatabase() {
+		
+		//create a list of points to add to the test database
+		List<PointNode> points = new ArrayList<PointNode>();
+		points.add(_testNode1);
+		points.add(_testNode2);
+		
+		//create the database
+		PointNodeDatabase pointNodes = _gb.buildPointDatabaseNode(points);
+		
+		//ensure there is no node in it
+		assertTrue(pointNodes.contains(_testNode1));
+		
+		//assure the size is 0
+		assertEquals(2 ,pointNodes.getSize());
+		
+		//ensure the the point exists in the database
+		assertTrue(pointNodes.contains(1, 1));
+		
+		points.add(_testNode3);
+		points.add(_testNode4);
+		
+		//add elements to the database
+		pointNodes = _gb.buildPointDatabaseNode(points);
+		
+		//assure the size is 0
+		assertTrue(pointNodes.contains(4, 4));
+		
+		//assure the size is 0
+		assertEquals(4 ,pointNodes.getSize());
+		
+		
+		assertTrue(pointNodes.contains(_testNode4));
+		
+	}
+	
+	
+	
+	@Test
+	void testBuildPointNode() {
+		PointNode point1 = _gb.buildPointNode(_description, 1, 1);
+		
+		//ensure the x and y values are correct
+		assertEquals(1 ,point1.getX());
+		assertEquals(1 ,point1.getY());
+		
+		
+		//check the name of the node
+		assertEquals(_description , point1.getName());
 	}
 	
 	
