@@ -1,4 +1,7 @@
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,10 +111,10 @@ class GeometryBuilderTest {
 		//test for the second points
 		assertTrue(segment.getPoint2().equals(_testNode2));
 
-		//check that node 1 string menthod works
+		//check that node 1 string method works
 		assertEquals( "(Node1)(1.0, 1.0)", segment.getPoint1().toString());
 
-		//check that node 2 string menthod works
+		//check that node 2 string method works
 		assertEquals( "(Node2)(2.0, 2.0)", segment.getPoint2().toString());
 
 		//do the same thing with different values
@@ -123,10 +126,10 @@ class GeometryBuilderTest {
 		//test for the second points
 		assertTrue(segment.getPoint2().equals(_testNode3));
 
-		//check that node 1 string menthod works
+		//check that node 1 string method works
 		assertEquals( "(Node2)(2.0, 2.0)", segment.getPoint1().toString());
 
-		//check that node 2 string menthod works
+		//check that node 2 string method works
 		assertEquals( "(Node3)(3.0, 3.0)", segment.getPoint2().toString());
 
 
