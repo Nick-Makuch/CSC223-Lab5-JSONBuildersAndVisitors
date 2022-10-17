@@ -20,7 +20,7 @@ import input.exception.ParseException;
  * a figure passed through as a json file
  * 
  * @author Nick, James, Sally
- * @Date 10-5-22
+ * @Date 10-16-22
  */
 
 

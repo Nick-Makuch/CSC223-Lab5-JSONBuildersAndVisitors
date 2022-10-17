@@ -66,6 +66,11 @@ class ParseTest{
 
 		assertTrue(node instanceof FigureNode);
 		
+		StringBuilder sb = new StringBuilder();
+		
+
+		node.unparse(sb, 1);
+		System.out.println(sb.toString());
 
 
 	}
@@ -84,6 +89,12 @@ class ParseTest{
 
 		assertTrue(node instanceof FigureNode);
 		
+		StringBuilder sb = new StringBuilder();
+
+
+		node.unparse(sb, 1);
+
+		System.out.println(sb.toString());
 
 	}
 	
@@ -103,6 +114,12 @@ class ParseTest{
 
 		assertTrue(node instanceof FigureNode);
 		
+		StringBuilder sb = new StringBuilder();
+
+		
+		node.unparse(sb, 1);
+
+		System.out.println(sb.toString());
 
 	}
 	
@@ -119,7 +136,14 @@ class ParseTest{
 		ComponentNode node = ParseTest.runFigureParseTest("fully_connected_irregular_polygon.json");
 
 		assertTrue(node instanceof FigureNode);
-	
+		
+		StringBuilder sb = new StringBuilder();
+		
+
+		node.unparse(sb, 1);
+		
+		System.out.println(sb.toString());
+
 
 	}
 	
