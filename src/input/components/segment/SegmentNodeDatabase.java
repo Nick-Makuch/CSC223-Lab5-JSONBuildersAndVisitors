@@ -23,7 +23,7 @@ import input.components.point.*;
 import input.visitor.ComponentNodeVisitor;
 
 public class SegmentNodeDatabase implements ComponentNode {
-	private Map<PointNode, Set<PointNode>> _adjLists;
+	protected Map<PointNode, Set<PointNode>> _adjLists;
 	
 	public SegmentNodeDatabase() {
 		_adjLists = new HashMap<PointNode, Set<PointNode>>();

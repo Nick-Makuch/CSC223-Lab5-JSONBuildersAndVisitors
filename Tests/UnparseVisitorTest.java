@@ -45,7 +45,7 @@ public class UnparseVisitorTest
 		assertEquals("\n{\n"
 				+ StringUtilities.indent(1) + "Figure:\n"
 				+ StringUtilities.indent(1) + "{\n"
-				+ StringUtilities.indent(2) + "Description: description\n"
+				+ StringUtilities.indent(2) + "Description: description,\n"
 				+ StringUtilities.indent(2) + "Points:\n"
 				+ StringUtilities.indent(2) + "{\n"
 				+ StringUtilities.indent(3) + "Point(Node1)(1.0, 1.0)\n"

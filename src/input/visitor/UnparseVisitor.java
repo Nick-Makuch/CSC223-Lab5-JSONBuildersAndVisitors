@@ -8,6 +8,7 @@ import input.components.*;
 import input.components.point.*;
 import input.components.segment.SegmentNode;
 import input.components.segment.SegmentNodeDatabase;
+import utilities.io.StringUtilities;
 
 //
 // A JSON file may contain:
@@ -26,9 +27,19 @@ public class UnparseVisitor implements ComponentNodeVisitor
 		AbstractMap.SimpleEntry<StringBuilder, Integer> pair = (AbstractMap.SimpleEntry<StringBuilder, Integer>)(o);
 		StringBuilder sb = pair.getKey();
 		int level = pair.getValue();
-
-		node.unparse(sb, level);
 		
+		sb.append(StringUtilities.indent(level) + "{" + "\n");
+		pair.setValue(pair.getValue() + 2);
+		
+        sb.append(StringUtilities.indent(level+1) + "Figure:\n");
+        sb.append(StringUtilities.indent(level+1) +"{" + "\n");
+        sb.append(StringUtilities.indent(level+2)+ "Description: " + node.getDescription() + ",\n");
+        
+        node.getPointsDatabase().accept(this, o);
+        node.getSegments().accept(this, o);
+        
+        sb.append(StringUtilities.indent(level+1) + "}\n");
+        sb.append(StringUtilities.indent(level) + "}\n");
         return sb;
 	}
 
