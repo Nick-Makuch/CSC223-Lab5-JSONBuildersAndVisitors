@@ -27,21 +27,23 @@ public class UnparseVisitor implements ComponentNodeVisitor
 		StringBuilder sb = pair.getKey();
 		int level = pair.getValue();
 
-        sb.append();
-
-        return null;
+		node.unparse(sb, level);
+		
+        return sb;
 	}
 
 	@Override
 	public Object visitSegmentDatabaseNode(SegmentNodeDatabase node, Object o)
 	{
+		// Unpack the input object containing a Stringbuilder and an indentation level
 		@SuppressWarnings("unchecked")
 		AbstractMap.SimpleEntry<StringBuilder, Integer> pair = (AbstractMap.SimpleEntry<StringBuilder, Integer>)(o);
 		StringBuilder sb = pair.getKey();
 		int level = pair.getValue();
-        // TODO
+        
+		node.unparse(sb, level);
 		
-        return null;
+        return sb;
 	}
 
 	/**
@@ -51,34 +53,34 @@ public class UnparseVisitor implements ComponentNodeVisitor
 	@Override
 	public Object visitSegmentNode(SegmentNode node, Object o)
 	{
-		@SuppressWarnings("unchecked")
-		AbstractMap.SimpleEntry<StringBuilder, Integer> pair = (AbstractMap.SimpleEntry<StringBuilder, Integer>)(o);
-		StringBuilder sb = pair.getKey();
-		int level = pair.getValue();
 		return null;
 	}
 
 	@Override
 	public Object visitPointNodeDatabase(PointNodeDatabase node, Object o)
 	{
+		// Unpack the input object containing a Stringbuilder and an indentation level
 		@SuppressWarnings("unchecked")
 		AbstractMap.SimpleEntry<StringBuilder, Integer> pair = (AbstractMap.SimpleEntry<StringBuilder, Integer>)(o);
 		StringBuilder sb = pair.getKey();
 		int level = pair.getValue();
-        // TODO
 		
-        return null;
+		node.unparse(sb, level);
+		
+        return sb;
 	}
 	
 	@Override
 	public Object visitPointNode(PointNode node, Object o)
 	{
+		// Unpack the input object containing a Stringbuilder and an indentation level
 		@SuppressWarnings("unchecked")
 		AbstractMap.SimpleEntry<StringBuilder, Integer> pair = (AbstractMap.SimpleEntry<StringBuilder, Integer>)(o);
 		StringBuilder sb = pair.getKey();
 		int level = pair.getValue();
-        // TODO
-        
-        return null;
+		
+		node.unparse(sb, level);
+		
+        return sb;
 	}
 }
