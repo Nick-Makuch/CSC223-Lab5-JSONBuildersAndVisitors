@@ -29,6 +29,7 @@ import input.exception.ParseException;
 public class JSONParser
 {
 	protected ComponentNode  _astRoot;
+	
 	private DefaultBuilder _builder;
 
 
@@ -188,7 +189,6 @@ public class JSONParser
 				segmentsList.add(key2AsPointNode);				
 				_builder.addSegmentToDatabase(JSONSegmentDatabase, keyAsPointNode, key2AsPointNode);
 			}
-				
 			
 		}
 

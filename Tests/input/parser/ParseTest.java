@@ -20,13 +20,8 @@ import input.exception.ParseException;
  * @Date 10-5-22
  */
 
-class ParseTest
-
-
-{
+class ParseTest{
 	
-	
-
 	/*
 	 * 
 	 * Test method to run the test on the parse method
