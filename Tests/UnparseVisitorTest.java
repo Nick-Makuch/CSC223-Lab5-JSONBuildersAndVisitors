@@ -10,6 +10,7 @@ import input.components.point.PointNodeDatabase;
 import input.components.segment.SegmentNode;
 import input.components.segment.SegmentNodeDatabase;
 import input.visitor.UnparseVisitor;
+import utilities.io.StringUtilities;
 
 public class UnparseVisitorTest
 {
@@ -41,22 +42,27 @@ public class UnparseVisitorTest
 		StringBuilder sb = new StringBuilder();
 		UnparseVisitor unparser = new UnparseVisitor();
 		
-		assertEquals("Description: description\r\n"
-				+ "Points:\r\n"
-				+ "{\r\n"
-				+ "    Point(Node1)(1.0, 1.0)\r\n"
-				+ "    Point(Node2)(2.0, 2.0)\r\n"
-				+ "    Point(Node3)(3.0, 3.0)\r\n"
-				+ "    Point(Node4)(4.0, 4.0)\r\n"
-				+ "}\r\n"
-				+ "Segments:\r\n"
-				+ "{\r\n"
-				+ "    Node2 : Node1 Node3 \r\n"
-				+ "    Node1 : Node2 Node4 \r\n"
-				+ "    Node3 : Node2 Node4 \r\n"
-				+ "    Node4 : Node3 Node1 \r\n"
-				+ "}", unparser.visitFigureNode(testFigureNode,
-		new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0)).toString());
+		assertEquals("\n{\n"
+				+ StringUtilities.indent(1) + "Figure:\n"
+				+ StringUtilities.indent(1) + "{\n"
+				+ StringUtilities.indent(2) + "Description: description\n"
+				+ StringUtilities.indent(2) + "Points:\n"
+				+ StringUtilities.indent(2) + "{\n"
+				+ StringUtilities.indent(3) + "Point(Node1)(1.0, 1.0)\n"
+				+ StringUtilities.indent(3) + "Point(Node2)(2.0, 2.0)\n"
+				+ StringUtilities.indent(3) + "Point(Node3)(3.0, 3.0)\n"
+				+ StringUtilities.indent(3) + "Point(Node4)(4.0, 4.0)\n"
+				+ StringUtilities.indent(2) + "}\n"
+				+ StringUtilities.indent(2) + "Segments:\n"
+				+ StringUtilities.indent(2) + "{\n"
+				+ StringUtilities.indent(3) + "Node2 : Node1 Node3 \n"
+				+ StringUtilities.indent(3) + "Node1 : Node2 Node4 \n"
+				+ StringUtilities.indent(3) + "Node3 : Node2 Node4 \n"
+				+ StringUtilities.indent(3) + "Node4 : Node3 Node1 \n"
+				+ StringUtilities.indent(2) + "}\n"
+				+ StringUtilities.indent(1) + "}\n"
+				+ "}\n" , ("\n" + unparser.visitFigureNode(testFigureNode,
+		new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0)).toString()));
 		
 //		System.out.println(unparser.visitFigureNode(testFigureNode,
 //		new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0)));
@@ -90,15 +96,15 @@ public class UnparseVisitorTest
 		StringBuilder sb = new StringBuilder();
 		UnparseVisitor unparser = new UnparseVisitor();
 		
-		assertEquals("Segments:\r\n"
-				+ "{\r\n"
-				+ "    Node2 : Node1 Node3 \r\n"
-				+ "    Node1 : Node2 Node4 \r\n"
-				+ "    Node3 : Node2 Node4 \r\n"
-				+ "    Node4 : Node3 Node1 \r\n"
-				+ "}\r\n"
+		assertEquals("Segments:\n"
+				+ "{\n"
+				+ StringUtilities.indent(1) + "Node2 : Node1 Node3 \n"
+				+ StringUtilities.indent(1) + "Node1 : Node2 Node4 \n"
+				+ StringUtilities.indent(1) + "Node3 : Node2 Node4 \n"
+				+ StringUtilities.indent(1) + "Node4 : Node3 Node1 \n"
+				+ "}\n"
 				, unparser.visitSegmentDatabaseNode(testSegmentNodeDatabase,
-						new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0)));
+						new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0)).toString());
 		
 //		System.out.println(unparser.visitSegmentDatabaseNode(testSegmentNodeDatabase,
 //				new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0)));
@@ -125,13 +131,13 @@ public class UnparseVisitorTest
 		StringBuilder sb = new StringBuilder();
 		UnparseVisitor unparser = new UnparseVisitor();
 		
-		assertEquals("Points:\r\n"
-				+ "	{\r\n"
-				+ "    Point(Node1)(1.0, 1.0)\r\n"
-				+ "	   Point(Node2)(2.0, 2.0)\r\n"
-				+ "	   Point(Node3)(3.0, 3.0)\r\n"
-				+ "	   Point(Node4)(4.0, 4.0)\r\n"
-				+ "	}" + "\n", unparser.visitPointNodeDatabase(_testPointNodeDatabase,
+		assertEquals("Points:\n"
+				+ "{\n"
+				+ StringUtilities.indent(1) + "Point(Node1)(1.0, 1.0)\n"
+				+ StringUtilities.indent(1) + "Point(Node2)(2.0, 2.0)\n"
+				+ StringUtilities.indent(1) + "Point(Node3)(3.0, 3.0)\n"
+				+ StringUtilities.indent(1) + "Point(Node4)(4.0, 4.0)\n"
+				+ "}\n", unparser.visitPointNodeDatabase(_testPointNodeDatabase,
 						new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0)).toString());
 		
 //		System.out.println(unparser.visitPointNodeDatabase(_testPointNodeDatabase,

@@ -6,6 +6,7 @@ import input.components.point.PointNode;
 import input.components.point.PointNodeDatabase;
 import input.components.segment.SegmentNodeDatabase;
 import input.visitor.ComponentNodeVisitor;
+import utilities.io.StringUtilities;
 
 
 /**
@@ -50,23 +51,32 @@ public class FigureNode implements ComponentNode
 	 * @param 
 	 */
 	
-	
+	@Override
+	 public Object accept(ComponentNodeVisitor visitor, Object o)
+	 {
+		return visitor.visitFigureNode(this, o);
+	 }
 	
 	@Override
 	public void unparse(StringBuilder sb, int level)
 	{
 		
 		//get the description
-		sb.append("Description: " + _description + "\n");
+		sb.append(StringUtilities.indent(level) + "{" + "\n");
+		level++;
+        sb.append(StringUtilities.indent(level) + "Figure:\n");
+        sb.append(StringUtilities.indent(level) +"{" + "\n");
+        sb.append(StringUtilities.indent(level+1)+ "Description: " + _description + "\n");
 		
 		//unparse the points calling the method from point node database
-		_points.unparse(sb, level);
+		_points.unparse(sb, level+1);
 		
 		
 		//unparse segments by calling the method from segment node database
-		_segments.unparse(sb, level);
+		_segments.unparse(sb, level+1);
 		
-
+		sb.append(StringUtilities.indent(level) +"}" + "\n");
+		sb.append(StringUtilities.indent(level-1) +"}" + "\n");
     }
 	
 	
