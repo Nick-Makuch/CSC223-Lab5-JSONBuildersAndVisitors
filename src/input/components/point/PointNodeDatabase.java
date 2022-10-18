@@ -47,6 +47,7 @@ public class PointNodeDatabase implements ComponentNode
 	}
 	
 	public int getSize() {return _points.size();}
+	public Set<PointNode> get_points() {return _points;}
 	public Object[] asArray(){return _points.toArray();}
 	
 	/**

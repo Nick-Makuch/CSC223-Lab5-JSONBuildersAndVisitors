@@ -39,6 +39,8 @@ public class SegmentNodeDatabase implements ComponentNode {
 		return visitor.visitSegmentDatabaseNode(this, o);
 	 }
 	
+	public Map<PointNode, Set<PointNode>> get_adjLists() {return _adjLists;}
+	
 	/**
 	 * Calculates the number of undirectedEdges in the database
 	 * @return the number of undirected edges

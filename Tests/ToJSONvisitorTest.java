@@ -52,7 +52,22 @@ public class ToJSONvisitorTest
 	@Test
 	void visitSegNodeDatabaseTest() 
 	{
+		PointNode _testNode1 = new PointNode("Node1", 1 ,1);
+		PointNode _testNode2 = new PointNode("Node2" ,2 ,2);
+		PointNode _testNode3 = new PointNode("Node3" ,3 ,3);
+		PointNode _testNode4 = new PointNode("Node4" ,4 ,4);
+			
+		SegmentNodeDatabase testSegmentNodeDatabase = new SegmentNodeDatabase();
+		testSegmentNodeDatabase.addUndirectedEdge(_testNode2, _testNode1);
+		testSegmentNodeDatabase.addUndirectedEdge(_testNode3, _testNode2);
+		testSegmentNodeDatabase.addUndirectedEdge(_testNode4, _testNode3);
+		testSegmentNodeDatabase.addUndirectedEdge(_testNode4, _testNode1);
 		
+		ToJSONvisitor testVisitor = new ToJSONvisitor();
+		JSONObject jsonSegNodeDatabase = (JSONObject) testVisitor.visitSegmentDatabaseNode(testSegmentNodeDatabase, null);
+		
+		System.out.println(testVisitor.toString(0, jsonSegNodeDatabase));
+		assertTrue(jsonSegNodeDatabase instanceof JSONObject);
 	}
 	
 	@Test
@@ -69,7 +84,11 @@ public class ToJSONvisitorTest
 		_testPointNodeDatabase.put(_testNode3);
 		_testPointNodeDatabase.put(_testNode4);
 		
+		ToJSONvisitor testVisitor = new ToJSONvisitor();
+		JSONObject jsonPNDatabase = (JSONObject) testVisitor.visitPointNodeDatabase(_testPointNodeDatabase, null);
 		
+//		System.out.println(testVisitor.toString(0, jsonPNDatabase));
+		assertTrue(jsonPNDatabase instanceof JSONObject);
 	}
 	
 	@Test
@@ -86,10 +105,10 @@ public class ToJSONvisitorTest
 		JSONObject jsonPN3 = (JSONObject) testVisitor.visitPointNode(_testNode3, null);
 		JSONObject jsonPN4 = (JSONObject) testVisitor.visitPointNode(_testNode4, null);
 		
-		System.out.println(testVisitor.toString(0, jsonPN1));
-		System.out.println(testVisitor.toString(0, jsonPN2));
-		System.out.println(testVisitor.toString(0, jsonPN3));
-		System.out.println(testVisitor.toString(0, jsonPN4));
+//		System.out.println(testVisitor.toString(0, jsonPN1));
+//		System.out.println(testVisitor.toString(0, jsonPN2));
+//		System.out.println(testVisitor.toString(0, jsonPN3));
+//		System.out.println(testVisitor.toString(0, jsonPN4));
 		
 		assertTrue(jsonPN1 instanceof JSONObject);
 		assertTrue(jsonPN2 instanceof JSONObject);

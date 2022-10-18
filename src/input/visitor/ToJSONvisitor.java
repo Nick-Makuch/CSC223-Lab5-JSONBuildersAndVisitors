@@ -86,7 +86,27 @@ public class ToJSONvisitor implements ComponentNodeVisitor
 //		
 //		return new JSONObject(sb.toString());
 		
-		return null;
+		JSONObject jsonSegNodeDatabase = new JSONObject();
+		StringBuilder sb = new StringBuilder();
+		int level = 0;
+		
+		sb.append(StringUtilities.indent(level) + "{" + "\n");
+		
+		for (PointNode key : node.get_adjLists().keySet()) 
+		{
+			sb.append(StringUtilities.indent(level+1) + key.getName() + " : ");
+			
+			for(PointNode value : node.get_adjLists().get(key)) 
+				sb.append(value.getName() + " ");
+			
+			sb.append("\n");
+		}
+		
+		sb.append(StringUtilities.indent(level) + "}" + "\n");
+		
+		return jsonSegNodeDatabase.put("Segments", sb.toString());
+		
+		//return null;
 	}
 
 	/**
@@ -99,32 +119,24 @@ public class ToJSONvisitor implements ComponentNodeVisitor
 
 	@Override
 	public Object visitPointNode(PointNode node, Object o) 
-	{
-		//JSONObject jSONpointNode = new JSONObject();
-//		StringBuilder sb = new StringBuilder();
-//		sb.append("{" + "\n");
-//		sb.append("Point:" + "\n");
-//		sb.append("{" + "\n");
-//		node.unparse(sb, 0);
-//		sb.append("}" + "\n");
-//		sb.append("}" + "\n");
-//		
-//		return new JSONObject(sb);
-		
+	{	
 		JSONObject jsonPoint = new JSONObject();
-		jsonPoint.put("Point", node.toString());
-		return jsonPoint;
-		
-		//return null;
+		return jsonPoint.put("Point", node.toString());
 	}
 
 	@Override
 	public Object visitPointNodeDatabase(PointNodeDatabase node, Object o) 
 	{
-		//JSONObject jSONpointNodeDatabase = new JSONObject();
-		
-		
-		return null;
+		JSONObject jsonPointNodeDatabase = new JSONObject();
+		StringBuilder sb = new StringBuilder();
+		int level = 0;
+		//node.unparse(sb, 0);
+		sb.append(StringUtilities.indent(level) + "\n" + "{" + "\n");
+		//add this to the string builder
+		for(PointNode point : node.get_points())		
+			sb.append(StringUtilities.indent(level+1) + "Point"+ point.toString() + "\n");
+		return jsonPointNodeDatabase.put("Points ", sb.toString());
+
 	}
 	
 	public String toString(int i, JSONObject jObject) 
