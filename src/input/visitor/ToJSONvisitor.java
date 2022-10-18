@@ -41,38 +41,54 @@ public class ToJSONvisitor implements ComponentNodeVisitor
 //		return _JsonObject.toString(i);
 //	}
 
+//	@Override
+//	public Object visitFigureNode(FigureNode node, Object o) 
+//	{		
+//		// Unpack the input object containing a Stringbuilder and an indentation level
+//		@SuppressWarnings("unchecked")
+//		AbstractMap.SimpleEntry<StringBuilder, Integer> pair = (AbstractMap.SimpleEntry<StringBuilder, Integer>)(o);
+//		StringBuilder sb = pair.getKey();
+//		int level = pair.getValue();
+//		//UnparseVisitor unparser = new UnparseVisitor();
+//			
+//		sb.append(StringUtilities.indent(level) + "{" + "\n");
+//		pair.setValue(pair.getValue() + 2);
+//				
+//		sb.append(StringUtilities.indent(level+1) + "Figure:\n");
+//		sb.append(StringUtilities.indent(level+1) +"{" + "\n");
+//		sb.append(StringUtilities.indent(level+2)+ "Description: " + node.getDescription() + ",\n");
+//		        
+////		node.getPointsDatabase().accept(unparser, o);
+////		node.getSegments().accept(unparser, o);
+////		sb.append(unparser.visitPointNodeDatabase(node.getPointsDatabase(), o));
+//		        
+//		sb.append(StringUtilities.indent(level+1) + "}\n");
+//		sb.append(StringUtilities.indent(level) + "}\n");
+//		
+//		return new JSONObject(sb.toString());
+//		//return new JSONObject(new JSONTokener(sb.toString()));
+//		
+////		return new JSONObject(node.toString());
+//		
+//		//return null;
+//	}
+	
+	/**
+	 * Converts provided FigureNode into a JSONobject
+	 * @return object (JSONobject)
+	 * */
 	@Override
 	public Object visitFigureNode(FigureNode node, Object o) 
-	{		
-		// Unpack the input object containing a Stringbuilder and an indentation level
-		@SuppressWarnings("unchecked")
-		AbstractMap.SimpleEntry<StringBuilder, Integer> pair = (AbstractMap.SimpleEntry<StringBuilder, Integer>)(o);
-		StringBuilder sb = pair.getKey();
-		int level = pair.getValue();
-		//UnparseVisitor unparser = new UnparseVisitor();
-			
-		sb.append(StringUtilities.indent(level) + "{" + "\n");
-		pair.setValue(pair.getValue() + 2);
-				
-		sb.append(StringUtilities.indent(level+1) + "Figure:\n");
-		sb.append(StringUtilities.indent(level+1) +"{" + "\n");
-		sb.append(StringUtilities.indent(level+2)+ "Description: " + node.getDescription() + ",\n");
-		        
-//		node.getPointsDatabase().accept(unparser, o);
-//		node.getSegments().accept(unparser, o);
-//		sb.append(unparser.visitPointNodeDatabase(node.getPointsDatabase(), o));
-		        
-		sb.append(StringUtilities.indent(level+1) + "}\n");
-		sb.append(StringUtilities.indent(level) + "}\n");
+	{
 		
-		return new JSONObject(sb.toString());
-		//return new JSONObject(new JSONTokener(sb.toString()));
 		
-//		return new JSONObject(node.toString());
-		
-		//return null;
+		return null;
 	}
 
+	/**
+	 * Converts provided SegNodeDatabase into a JSONobject
+	 * @return object (JSONobject)
+	 * */
 	@Override
 	public Object visitSegmentDatabaseNode(SegmentNodeDatabase node, Object o) 
 	{
@@ -105,8 +121,6 @@ public class ToJSONvisitor implements ComponentNodeVisitor
 		sb.append(StringUtilities.indent(level) + "}" + "\n");
 		
 		return jsonSegNodeDatabase.put("Segments", sb.toString());
-		
-		//return null;
 	}
 
 	/**
@@ -117,6 +131,10 @@ public class ToJSONvisitor implements ComponentNodeVisitor
 		return null;
 	}
 
+	/**
+	 * Converts provided PointNode into a JSONobject
+	 * @return object (JSONobject)
+	 * */
 	@Override
 	public Object visitPointNode(PointNode node, Object o) 
 	{	
@@ -124,6 +142,10 @@ public class ToJSONvisitor implements ComponentNodeVisitor
 		return jsonPoint.put("Point", node.toString());
 	}
 
+	/**
+	 * Converts provided PointNodeDatabase into a JSONobject
+	 * @return object (JSONobject)
+	 * */
 	@Override
 	public Object visitPointNodeDatabase(PointNodeDatabase node, Object o) 
 	{
@@ -139,6 +161,10 @@ public class ToJSONvisitor implements ComponentNodeVisitor
 
 	}
 	
+	/**
+	 * Converts given JSONobject into "pretty-printed" String
+	 * @return String
+	 * */
 	public String toString(int i, JSONObject jObject) 
 	{
 		return jObject.toString(i);
