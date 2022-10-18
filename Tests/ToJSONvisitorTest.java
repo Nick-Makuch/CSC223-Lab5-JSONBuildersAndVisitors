@@ -1,3 +1,4 @@
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.AbstractMap;
@@ -44,7 +45,8 @@ public class ToJSONvisitorTest
 				new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0));
 		
 		
-		System.out.println(testVisitor.toString(0, jsonFigureNode));
+		//System.out.println(testVisitor.toString(0, jsonFigureNode));
+		assertTrue(jsonFigureNode instanceof JSONObject);
 	}
 	
 	@Test
@@ -56,13 +58,43 @@ public class ToJSONvisitorTest
 	@Test
 	void visitPointNodeDatabaseTest() 
 	{
+		PointNode _testNode1 = new PointNode("Node1", 1 ,1);
+		PointNode _testNode2 = new PointNode("Node2" ,2 ,2);
+		PointNode _testNode3 = new PointNode("Node3" ,3 ,3);
+		PointNode _testNode4 = new PointNode("Node4" ,4 ,4);
+		
+		PointNodeDatabase _testPointNodeDatabase = new PointNodeDatabase();
+		_testPointNodeDatabase.put(_testNode1);
+		_testPointNodeDatabase.put(_testNode2);
+		_testPointNodeDatabase.put(_testNode3);
+		_testPointNodeDatabase.put(_testNode4);
+		
 		
 	}
 	
 	@Test
 	void visitPointNodeTest() 
 	{
+		PointNode _testNode1 = new PointNode("Node1", 1 ,1);
+		PointNode _testNode2 = new PointNode("Node2" ,2 ,2);
+		PointNode _testNode3 = new PointNode("Node3" ,3 ,3);
+		PointNode _testNode4 = new PointNode("Node4" ,4 ,4);
 		
+		ToJSONvisitor testVisitor = new ToJSONvisitor();
+		JSONObject jsonPN1 = (JSONObject) testVisitor.visitPointNode(_testNode1, null);
+		JSONObject jsonPN2 = (JSONObject) testVisitor.visitPointNode(_testNode2, null);
+		JSONObject jsonPN3 = (JSONObject) testVisitor.visitPointNode(_testNode3, null);
+		JSONObject jsonPN4 = (JSONObject) testVisitor.visitPointNode(_testNode4, null);
+		
+		System.out.println(testVisitor.toString(0, jsonPN1));
+		System.out.println(testVisitor.toString(0, jsonPN2));
+		System.out.println(testVisitor.toString(0, jsonPN3));
+		System.out.println(testVisitor.toString(0, jsonPN4));
+		
+		assertTrue(jsonPN1 instanceof JSONObject);
+		assertTrue(jsonPN2 instanceof JSONObject);
+		assertTrue(jsonPN3 instanceof JSONObject);
+		assertTrue(jsonPN4 instanceof JSONObject);
 	}
 	
 	

@@ -3,6 +3,7 @@ package input.visitor;
 import java.util.AbstractMap;
 
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import input.components.FigureNode;
 import input.components.point.PointNode;
@@ -48,6 +49,7 @@ public class ToJSONvisitor implements ComponentNodeVisitor
 		AbstractMap.SimpleEntry<StringBuilder, Integer> pair = (AbstractMap.SimpleEntry<StringBuilder, Integer>)(o);
 		StringBuilder sb = pair.getKey();
 		int level = pair.getValue();
+		//UnparseVisitor unparser = new UnparseVisitor();
 			
 		sb.append(StringUtilities.indent(level) + "{" + "\n");
 		pair.setValue(pair.getValue() + 2);
@@ -56,13 +58,17 @@ public class ToJSONvisitor implements ComponentNodeVisitor
 		sb.append(StringUtilities.indent(level+1) +"{" + "\n");
 		sb.append(StringUtilities.indent(level+2)+ "Description: " + node.getDescription() + ",\n");
 		        
-		node.getPointsDatabase().accept(this, o);
-		node.getSegments().accept(this, o);
+//		node.getPointsDatabase().accept(unparser, o);
+//		node.getSegments().accept(unparser, o);
+//		sb.append(unparser.visitPointNodeDatabase(node.getPointsDatabase(), o));
 		        
 		sb.append(StringUtilities.indent(level+1) + "}\n");
 		sb.append(StringUtilities.indent(level) + "}\n");
 		
 		return new JSONObject(sb.toString());
+		//return new JSONObject(new JSONTokener(sb.toString()));
+		
+//		return new JSONObject(node.toString());
 		
 		//return null;
 	}
@@ -70,8 +76,15 @@ public class ToJSONvisitor implements ComponentNodeVisitor
 	@Override
 	public Object visitSegmentDatabaseNode(SegmentNodeDatabase node, Object o) 
 	{
-		//JSONObject jSONsegNodeDatabase = new JSONObject();
-		
+		// Unpack the input object containing a Stringbuilder and an indentation level
+//		@SuppressWarnings("unchecked")
+//		AbstractMap.SimpleEntry<StringBuilder, Integer> pair = (AbstractMap.SimpleEntry<StringBuilder, Integer>)(o);
+//		StringBuilder sb = pair.getKey();
+//		int level = pair.getValue();
+//		        
+//		node.unparse(sb, level);
+//		
+//		return new JSONObject(sb.toString());
 		
 		return null;
 	}
@@ -88,9 +101,21 @@ public class ToJSONvisitor implements ComponentNodeVisitor
 	public Object visitPointNode(PointNode node, Object o) 
 	{
 		//JSONObject jSONpointNode = new JSONObject();
+//		StringBuilder sb = new StringBuilder();
+//		sb.append("{" + "\n");
+//		sb.append("Point:" + "\n");
+//		sb.append("{" + "\n");
+//		node.unparse(sb, 0);
+//		sb.append("}" + "\n");
+//		sb.append("}" + "\n");
+//		
+//		return new JSONObject(sb);
 		
+		JSONObject jsonPoint = new JSONObject();
+		jsonPoint.put("Point", node.toString());
+		return jsonPoint;
 		
-		return null;
+		//return null;
 	}
 
 	@Override
