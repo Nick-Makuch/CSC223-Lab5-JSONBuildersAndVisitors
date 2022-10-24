@@ -45,7 +45,7 @@ public class ToJSONvisitorTest
 				new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0));
 		
 		
-		System.out.println(testVisitor.toString(0, jsonFigureNode));
+		//System.out.println(testVisitor.toString(0, jsonFigureNode));
 		assertTrue(jsonFigureNode instanceof JSONObject);
 	}
 	
