@@ -202,10 +202,12 @@ public class JSONParser
 	 * */
 	private PointNode getPointNode(String s, PointNodeDatabase points) 
 	{
+		//create an array of the points found
 		Object[] pointsList = points.asArray();
 		for(int i = 0; i < points.getSize(); i++) 
 		{
 			PointNode checker = (PointNode) pointsList[i];
+			//if the check node is the same as s then return that node
 			if(checker.getName().equals(s))
 				return checker;
 		}

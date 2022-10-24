@@ -115,6 +115,6 @@ public class ToJSONvisitorTest
 		assertTrue(jsonPN3 instanceof JSONObject);
 		assertTrue(jsonPN4 instanceof JSONObject);
 	}
-	
+
 	
 }
